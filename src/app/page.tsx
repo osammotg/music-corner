@@ -143,6 +143,7 @@ const t = {
       d1: "Classique",
       d2: "Vinyle",
       d3: "Scene",
+      d4: "Boutique",
     },
   },
   en: {
@@ -285,6 +286,7 @@ const t = {
       d1: "Classic",
       d2: "Vinyl",
       d3: "Stage",
+      d4: "Boutique",
     },
   },
 };
@@ -476,11 +478,19 @@ const designConfigs = {
     serviceBg: "bg-[#1a1a1a]",
     serviceStyle: "detailed" as const,
   },
+  4: {
+    heroImage: "/images/storefront.jpg",
+    heroOpacity: "opacity-100",
+    aboutImage: "/images/shop-interior.webp",
+    accentGradient: "",
+    serviceBg: "bg-white",
+    serviceStyle: "detailed" as const,
+  },
 };
 
 export default function Home() {
   const [lang, setLang] = useState<"fr" | "en">("fr");
-  const [design, setDesign] = useState<1 | 2 | 3>(1);
+  const [design, setDesign] = useState<1 | 2 | 3 | 4>(1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const s = t[lang];
   const dc = designConfigs[design];
@@ -498,31 +508,31 @@ export default function Home() {
   return (
     <>
       {/* Design Picker - fixed bar */}
-      <div className="fixed top-0 left-0 right-0 z-[60] bg-[#0a0a0a] border-b border-[var(--color-accent)]/30">
+      <div className={`fixed top-0 left-0 right-0 z-[60] border-b ${design === 4 ? "bg-[#FFFBEB] border-[#9A3412]/20" : "bg-[#0a0a0a] border-[var(--color-accent)]/30"}`}>
         <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3">
-          <span className="text-xs text-gray-400 hidden sm:inline">{s.designPicker.label}:</span>
-          {([1, 2, 3] as const).map((d) => (
+          <span className={`text-xs hidden sm:inline ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{s.designPicker.label}:</span>
+          {([1, 2, 3, 4] as const).map((d) => (
             <button
               key={d}
               onClick={() => setDesign(d)}
-              className={`px-4 py-1.5 text-sm font-semibold rounded transition-all ${
+              className={`px-4 py-1.5 text-sm font-semibold rounded transition-all cursor-pointer ${
                 design === d
-                  ? "bg-[var(--color-accent)] text-white"
-                  : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)] hover:text-white"
+                  ? design === 4 ? "bg-[#9A3412] text-[#FFFBEB]" : "bg-[var(--color-accent)] text-white"
+                  : design === 4 ? "bg-white text-[#5C3A1E] border border-[#9A3412]/20 hover:border-[#9A3412] hover:text-[#9A3412]" : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)] hover:text-white"
               }`}
             >
-              {d === 1 ? s.designPicker.d1 : d === 2 ? s.designPicker.d2 : s.designPicker.d3}
+              {d === 1 ? s.designPicker.d1 : d === 2 ? s.designPicker.d2 : d === 3 ? s.designPicker.d3 : s.designPicker.d4}
             </button>
           ))}
         </div>
       </div>
 
       {/* Navigation - offset for design picker */}
-      <nav className="fixed top-[44px] left-0 right-0 z-50 nav-blur bg-black/80 border-b border-white/5">
+      <nav className={`fixed top-[44px] left-0 right-0 z-50 border-b ${design === 4 ? "bg-[#FFFBEB]/90 backdrop-blur-md border-[#9A3412]/10" : "nav-blur bg-black/80 border-white/5"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <a href="#" className="flex items-center">
-              <img src="/images/logo.png" alt="Music Corner" className="h-10 w-auto drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]" />
+              <img src="/images/logo.png" alt="Music Corner" className={`h-10 w-auto ${design === 4 ? "" : "drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]"}`} />
             </a>
 
             {/* Desktop nav */}
@@ -531,14 +541,14 @@ export default function Home() {
                 <a
                   key={key}
                   href={`#${key}`}
-                  className="text-sm text-gray-300 hover:text-white transition-colors font-medium"
+                  className={`text-sm transition-colors font-medium ${design === 4 ? "text-[#5C3A1E] hover:text-[#9A3412]" : "text-gray-300 hover:text-white"}`}
                 >
                   {label}
                 </a>
               ))}
               <button
                 onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-                className="ml-2 px-3 py-1 border border-white/20 rounded text-xs font-semibold hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+                className={`ml-2 px-3 py-1 border rounded text-xs font-semibold transition-colors ${design === 4 ? "border-[#9A3412]/30 text-[#5C3A1E] hover:border-[#9A3412] hover:text-[#9A3412]" : "border-white/20 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"}`}
               >
                 {lang === "fr" ? "EN" : "FR"}
               </button>
@@ -548,13 +558,13 @@ export default function Home() {
             <div className="flex md:hidden items-center gap-3">
               <button
                 onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-                className="px-3 py-1 border border-white/20 rounded text-xs font-semibold"
+                className={`px-3 py-1 border rounded text-xs font-semibold ${design === 4 ? "border-[#9A3412]/30 text-[#5C3A1E]" : "border-white/20"}`}
               >
                 {lang === "fr" ? "EN" : "FR"}
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white"
+                className={design === 4 ? "text-[#3B1F0B]" : "text-white"}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   {mobileMenuOpen ? (
@@ -570,14 +580,14 @@ export default function Home() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-black/95 border-t border-white/5">
+          <div className={`md:hidden border-t ${design === 4 ? "bg-[#FFFBEB]/95 border-[#9A3412]/10" : "bg-black/95 border-white/5"}`}>
             <div className="px-4 py-3 space-y-2">
               {Object.entries(s.nav).map(([key, label]) => (
                 <a
                   key={key}
                   href={`#${key}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-gray-300 hover:text-white transition-colors"
+                  className={`block py-2 transition-colors ${design === 4 ? "text-[#5C3A1E] hover:text-[#9A3412]" : "text-gray-300 hover:text-white"}`}
                 >
                   {label}
                 </a>
@@ -702,40 +712,76 @@ export default function Home() {
         </section>
       )}
 
+      {design === 4 && (
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFFBEB]">
+          <div className="absolute inset-0">
+            <img src="/images/storefront.jpg" alt="Music Corner storefront" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FFFBEB]/60 via-transparent to-[#FFFBEB]" />
+          </div>
+          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto pt-20">
+            <img src="/images/logo.png" alt="Music Corner" className="h-28 sm:h-36 w-auto mx-auto mb-8" />
+            <div className="w-20 h-[2px] bg-[#9A3412] mx-auto mb-6" />
+            <p className="text-xl sm:text-2xl text-[#3B1F0B] mb-4 tracking-wide" style={{ fontFamily: "'Abril Fatface', serif" }}>
+              {s.hero.tagline}
+            </p>
+            <p className="text-lg text-[#5C3A1E] max-w-xl mx-auto mb-10 leading-relaxed" style={{ fontFamily: "'Merriweather', serif" }}>
+              {s.hero.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#services" className="px-8 py-3.5 bg-[#9A3412] text-[#FFFBEB] font-semibold rounded-full hover:bg-[#7C2D12] transition-colors text-center cursor-pointer" style={{ fontFamily: "'Merriweather', serif" }}>
+                {s.hero.cta}
+              </a>
+              <a href="#contact" className="px-8 py-3.5 border-2 border-[#9A3412] text-[#9A3412] font-semibold rounded-full hover:bg-[#9A3412]/10 transition-colors text-center cursor-pointer" style={{ fontFamily: "'Merriweather', serif" }}>
+                {s.hero.ctaContact}
+              </a>
+            </div>
+            <div className="mt-12 flex items-center justify-center gap-2 text-sm text-[#5C3A1E]">
+              <Stars count={5} />
+              <span className="ml-1">5.0 / 5</span>
+              <span>-</span>
+              <span>37 {s.reviews.googleRating}</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Theme wrapper for Design 4 (light mode) */}
+      <div className={design === 4 ? "bg-[#FFFBEB] text-[#3B1F0B] [&_.section-divider]:bg-gradient-to-r [&_.section-divider]:from-transparent [&_.section-divider]:via-[#9A3412] [&_.section-divider]:to-transparent" : ""} style={design === 4 ? { fontFamily: "'Merriweather', serif" } : undefined}>
+
       {/* ── ABOUT ── */}
-      <section id="about" className="py-20 px-4">
+      <section id="about" className={`py-20 px-4 ${design === 4 ? "bg-[#FFFBEB]" : ""}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">
             {s.about.title}
           </h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+              <p className={`text-lg leading-relaxed mb-6 ${design === 4 ? "text-[#5C3A1E]" : "text-gray-300"}`}>
                 {s.about.p1}
               </p>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+              <p className={`text-lg leading-relaxed mb-8 ${design === 4 ? "text-[#5C3A1E]" : "text-gray-300"}`}>
                 {s.about.p2}
               </p>
               <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] rounded-lg border border-white/10">
-                  <span className="text-2xl font-bold text-[var(--color-accent)]">MARSHALL</span>
-                  <span className="text-xs text-gray-400">{s.about.marshall}</span>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${design === 4 ? "bg-white border-[#9A3412]/20" : "bg-[#1a1a1a] border-white/10"}`}>
+                  <span className={`text-2xl font-bold ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>MARSHALL</span>
+                  <span className={`text-xs ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{s.about.marshall}</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] rounded-lg border border-white/10">
-                  <span className="text-lg font-bold text-[var(--color-gold)]">DS DRUM</span>
-                  <span className="text-xs text-gray-400">{s.about.dsdrum}</span>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${design === 4 ? "bg-white border-[#D97706]/20" : "bg-[#1a1a1a] border-white/10"}`}>
+                  <span className={`text-lg font-bold ${design === 4 ? "text-[#D97706]" : "text-[var(--color-gold)]"}`}>DS DRUM</span>
+                  <span className={`text-xs ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{s.about.dsdrum}</span>
                 </div>
               </div>
             </div>
             <div className="relative">
-              <div className={`aspect-[4/3] rounded-lg overflow-hidden bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : ""}`}>
+              <div className={`aspect-[4/3] overflow-hidden ${design === 4 ? "rounded-xl bg-[#F5ECD7] border border-[#9A3412]/10" : design === 2 ? "rounded-none bg-[#1a1a1a] border border-white/10" : "rounded-lg bg-[#1a1a1a] border border-white/10"}`}>
                 <img
                   src={dc.aboutImage}
                   alt="Music Corner shop"
                   className="w-full h-full object-cover opacity-90"
                 />
               </div>
-              <div className={`absolute -bottom-4 -right-4 bg-[var(--color-accent)] text-white px-6 py-3 font-bold text-sm ${design === 2 ? "rounded-none" : "rounded-lg"}`}>
+              <div className={`absolute -bottom-4 -right-4 px-6 py-3 font-bold text-sm ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-full" : design === 2 ? "bg-[var(--color-accent)] text-white rounded-none" : "bg-[var(--color-accent)] text-white rounded-lg"}`}>
                 SOORTS-HOSSEGOR
               </div>
             </div>
@@ -746,13 +792,20 @@ export default function Home() {
       <div className="section-divider max-w-4xl mx-auto" />
 
       {/* ── SERVICES ── */}
-      <section id="services" className="py-20 px-4">
+      <section id="services" className={`py-20 px-4 ${design === 4 ? "bg-[#F5ECD7]" : ""}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">
             {s.services.title}
           </h2>
           {(design === 2 || design === 3) && (
             <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+              {lang === "fr"
+                ? "Un savoir-faire artisanal au service de votre passion musicale"
+                : "Craftsmanship at the service of your musical passion"}
+            </p>
+          )}
+          {design === 4 && (
+            <p className="text-center text-[#5C3A1E] mb-12 max-w-2xl mx-auto">
               {lang === "fr"
                 ? "Un savoir-faire artisanal au service de votre passion musicale"
                 : "Craftsmanship at the service of your musical passion"}
@@ -810,6 +863,36 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          ) : design === 4 ? (
+            /* Design 4: Boutique - warm cards with terracotta accents */
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { icon: <WrenchIcon />, ...s.services.repair },
+                { icon: <ShoppingIcon />, ...s.services.sell },
+                { icon: <ChatIcon />, ...s.services.advice },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="bg-white rounded-xl p-8 border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="text-[#9A3412]">{service.icon}</div>
+                    <h3 className="text-xl font-bold text-[#3B1F0B]">{service.title}</h3>
+                  </div>
+                  <p className="text-[#5C3A1E] leading-relaxed mb-4">{service.desc}</p>
+                  <ul className="space-y-2">
+                    {service.details.map((detail) => (
+                      <li key={detail} className="flex items-center gap-2 text-sm text-[#5C3A1E]">
+                        <svg className="w-4 h-4 text-[#D97706] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           ) : (
             /* Design 3: Stage - large cards with left border accent + details */
             <div className="grid md:grid-cols-3 gap-8">
@@ -858,12 +941,12 @@ export default function Home() {
               .map(([key, label]) => (
                 <div
                   key={key}
-                  className={`card-hover bg-[#1a1a1a] border border-white/10 p-6 text-center ${design === 2 ? "rounded-none hover:border-[var(--color-gold)]/40" : "rounded-lg"}`}
+                  className={`p-6 text-center ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow" : `card-hover bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none hover:border-[var(--color-gold)]/40" : "rounded-lg"}`}`}
                 >
-                  <div className="mb-3 flex justify-center text-[var(--color-accent)]">
+                  <div className={`mb-3 flex justify-center ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>
                     <ProductIcon type={productIcons[key]} className="w-8 h-8" />
                   </div>
-                  <span className="text-sm font-semibold text-gray-200">
+                  <span className={`text-sm font-semibold ${design === 4 ? "text-[#3B1F0B]" : "text-gray-200"}`}>
                     {label}
                   </span>
                 </div>
@@ -875,7 +958,7 @@ export default function Home() {
       <div className="section-divider max-w-4xl mx-auto" />
 
       {/* Instagram Gallery */}
-      <section className="py-20 px-4 bg-[#111111]">
+      <section className={`py-20 px-4 ${design === 4 ? "bg-[#FFFBEB]" : "bg-[#111111]"}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-2">
             {s.instagram.title}
@@ -884,7 +967,7 @@ export default function Home() {
             href="https://www.instagram.com/musiccorner_hossegor/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-center text-[var(--color-accent)] font-semibold mb-10 hover:underline"
+            className={`block text-center font-semibold mb-10 hover:underline ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}
           >
             {s.instagram.subtitle}
           </a>
@@ -904,7 +987,7 @@ export default function Home() {
                 href="https://www.instagram.com/musiccorner_hossegor/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative aspect-square overflow-hidden bg-[#1a1a1a] ${design === 2 ? "rounded-none" : "rounded-lg"}`}
+                className={`group relative aspect-square overflow-hidden ${design === 4 ? "rounded-xl bg-[#F5ECD7]" : design === 2 ? "rounded-none bg-[#1a1a1a]" : "rounded-lg bg-[#1a1a1a]"}`}
               >
                 <img
                   src={img.src}
@@ -929,39 +1012,39 @@ export default function Home() {
       <div className="section-divider max-w-4xl mx-auto" />
 
       {/* Rental */}
-      <section id="rental" className="py-20 px-4 bg-[#111111]">
+      <section id="rental" className={`py-20 px-4 ${design === 4 ? "bg-[#F5ECD7]" : "bg-[#111111]"}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">
             {s.rental.title}
           </h2>
-          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className={`text-center mb-12 max-w-2xl mx-auto ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>
             {s.rental.subtitle}
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {s.rental.items.map((item) => (
               <div
                 key={item.name}
-                className={`card-hover bg-[#1a1a1a] border border-white/10 p-6 relative overflow-hidden ${design === 2 ? "rounded-none" : "rounded-lg"}`}
+                className={`relative overflow-hidden p-6 ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow" : `card-hover bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
               >
-                <div className="absolute top-0 right-0 rental-badge text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                <div className={`absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg ${design === 4 ? "bg-[#D97706] text-white" : "rental-badge text-white"}`}>
                   {lang === "fr" ? "LOCATION" : "RENTAL"}
                 </div>
-                <h3 className="text-lg font-bold mb-2 pr-16">{item.name}</h3>
-                <p className="text-[var(--color-gold)] font-semibold text-lg mb-2">
+                <h3 className={`text-lg font-bold mb-2 pr-16 ${design === 4 ? "text-[#3B1F0B]" : ""}`}>{item.name}</h3>
+                <p className={`font-semibold text-lg mb-2 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-gold)]"}`}>
                   {item.price}
                 </p>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
+                <p className={`text-sm ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{item.desc}</p>
               </div>
             ))}
           </div>
           <div className="text-center mt-8">
             <a
               href="tel:+33558438734"
-              className={`inline-block px-8 py-3 bg-[var(--color-accent)] text-white font-semibold hover:bg-[var(--color-accent-hover)] transition-colors ${design === 2 ? "rounded-none" : "rounded"}`}
+              className={`inline-block px-8 py-3 font-semibold transition-colors ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-full hover:bg-[#7C2D12]" : `bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] ${design === 2 ? "rounded-none" : "rounded"}`}`}
             >
               {s.rental.cta}
             </a>
-            <p className="text-xs text-gray-500 mt-4">{s.rental.note}</p>
+            <p className={`text-xs mt-4 ${design === 4 ? "text-[#5C3A1E]/60" : "text-gray-500"}`}>{s.rental.note}</p>
           </div>
         </div>
       </section>
@@ -978,23 +1061,23 @@ export default function Home() {
             <Stars count={5} />
             <span className="text-2xl font-bold">5.0</span>
           </div>
-          <p className="text-center text-gray-400 mb-12">
+          <p className={`text-center mb-12 ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>
             {s.reviews.subtitle} - 37+ {s.reviews.googleRating}
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {reviews.map((review) => (
               <div
                 key={review.name}
-                className={`bg-[#1a1a1a] border border-white/10 p-6 ${design === 2 ? "rounded-none" : "rounded-lg"}`}
+                className={`p-6 ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm" : `bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-white font-bold text-sm">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB]" : "bg-[var(--color-accent)] text-white"}`}>
                       {review.name[0]}
                     </div>
                     <div>
                       <p className="font-semibold text-sm">{review.name}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className={`text-xs ${design === 4 ? "text-[#5C3A1E]/50" : "text-gray-500"}`}>
                         {review.date[lang]}
                       </p>
                     </div>
@@ -1007,7 +1090,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <Stars count={review.rating} />
-                <p className="text-gray-300 text-sm mt-3 leading-relaxed">
+                <p className={`text-sm mt-3 leading-relaxed ${design === 4 ? "text-[#5C3A1E]" : "text-gray-300"}`}>
                   &ldquo;{review.text[lang]}&rdquo;
                 </p>
               </div>
@@ -1018,7 +1101,7 @@ export default function Home() {
               href="https://www.google.com/maps/place/Music+Corner/@43.6724709,-1.3894752,17z/data=!4m8!3m7!1s0xd5151b0d1a4384d:0x65ade1c84f4f665a!8m2!3d43.6724709!4d-1.3894752!9m1!1b1!16s%2Fg%2F11y7c9j00p"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-2 border border-white/20 rounded text-sm text-gray-300 hover:text-white hover:border-white transition-colors"
+              className={`inline-block px-6 py-2 border rounded text-sm transition-colors ${design === 4 ? "border-[#9A3412]/30 text-[#9A3412] hover:border-[#9A3412] hover:bg-[#9A3412]/5" : "border-white/20 text-gray-300 hover:text-white hover:border-white"}`}
             >
               {s.reviews.viewAll} &rarr;
             </a>
@@ -1029,7 +1112,7 @@ export default function Home() {
       <div className="section-divider max-w-4xl mx-auto" />
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-4 bg-[#111111]">
+      <section id="contact" className={`py-20 px-4 ${design === 4 ? "bg-[#F5ECD7]" : "bg-[#111111]"}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">
             {s.contact.title}
@@ -1039,18 +1122,18 @@ export default function Home() {
             <div className="space-y-8">
               {/* Address */}
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[var(--color-accent)]">
+                <div className={`mt-1 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>
                   <MapPinIcon />
                 </div>
                 <div>
                   <h3 className="font-bold mb-1">{s.contact.address}</h3>
-                  <p className="text-gray-300">33 Av. des Tisserands</p>
-                  <p className="text-gray-300">40150 Soorts-Hossegor, France</p>
+                  <p className={design === 4 ? "text-[#5C3A1E]" : "text-gray-300"}>33 Av. des Tisserands</p>
+                  <p className={design === 4 ? "text-[#5C3A1E]" : "text-gray-300"}>40150 Soorts-Hossegor, France</p>
                   <a
                     href="https://www.google.com/maps/dir//Music+Corner,+33+Av.+des+Tisserands,+40150+Soorts-Hossegor,+France"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--color-accent)] text-sm mt-1 inline-block hover:underline"
+                    className={`text-sm mt-1 inline-block hover:underline ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}
                   >
                     {s.contact.directions} &rarr;
                   </a>
@@ -1059,14 +1142,14 @@ export default function Home() {
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[var(--color-accent)]">
+                <div className={`mt-1 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>
                   <PhoneIcon />
                 </div>
                 <div>
                   <h3 className="font-bold mb-1">{s.contact.phone}</h3>
                   <a
                     href="tel:+33558438734"
-                    className="text-gray-300 hover:text-white transition-colors text-lg"
+                    className={`transition-colors text-lg ${design === 4 ? "text-[#5C3A1E] hover:text-[#9A3412]" : "text-gray-300 hover:text-white"}`}
                   >
                     +33 5 58 43 87 34
                   </a>
@@ -1075,7 +1158,7 @@ export default function Home() {
 
               {/* Hours */}
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[var(--color-accent)]">
+                <div className={`mt-1 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>
                   <ClockIcon />
                 </div>
                 <div>
@@ -1086,12 +1169,12 @@ export default function Home() {
                         key={h.day}
                         className="flex justify-between gap-8 text-sm"
                       >
-                        <span className="text-gray-400 w-24">{h.day}</span>
+                        <span className={`w-24 ${design === 4 ? "text-[#5C3A1E]/60" : "text-gray-400"}`}>{h.day}</span>
                         <span
                           className={
                             h.time === s.contact.closed
-                              ? "text-[var(--color-accent)]"
-                              : "text-gray-300"
+                              ? design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"
+                              : design === 4 ? "text-[#5C3A1E]" : "text-gray-300"
                           }
                         >
                           {h.time}
@@ -1110,7 +1193,7 @@ export default function Home() {
                     href="https://www.instagram.com/musiccorner_hossegor/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg hover:border-[var(--color-accent)] transition-colors"
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${design === 4 ? "bg-white border-[#9A3412]/10 hover:border-[#9A3412]" : "bg-[#1a1a1a] border-white/10 hover:border-[var(--color-accent)]"}`}
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -1121,7 +1204,7 @@ export default function Home() {
                     href="https://www.facebook.com/profile.php?id=61566539067498"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg hover:border-[var(--color-accent)] transition-colors"
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${design === 4 ? "bg-white border-[#9A3412]/10 hover:border-[#9A3412]" : "bg-[#1a1a1a] border-white/10 hover:border-[var(--color-accent)]"}`}
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -1133,7 +1216,7 @@ export default function Home() {
             </div>
 
             {/* Map */}
-            <div className="rounded-lg overflow-hidden border border-white/10 h-[400px] md:h-auto">
+            <div className={`overflow-hidden h-[400px] md:h-auto ${design === 4 ? "rounded-xl border border-[#9A3412]/10" : "rounded-lg border border-white/10"}`}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.123!2d-1.3894752!3d43.6724709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5151b0d1a4384d%3A0x65ade1c84f4f665a!2sMusic%20Corner!5e0!3m2!1sfr!2sfr!4v1"
                 width="100%"
@@ -1150,19 +1233,22 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-white/5">
+      <footer className={`py-8 px-4 border-t ${design === 4 ? "border-[#9A3412]/10 bg-[#FFFBEB]" : "border-white/5"}`}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center">
-            <img src="/images/logo.png" alt="Music Corner" className="h-8 w-auto drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]" />
+            <img src="/images/logo.png" alt="Music Corner" className={`h-8 w-auto ${design === 4 ? "" : "drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]"}`} />
           </div>
-          <p className="text-sm text-gray-500">
+          <p className={`text-sm ${design === 4 ? "text-[#5C3A1E]/60" : "text-gray-500"}`}>
             {s.footer.tagline}
           </p>
-          <p className="text-xs text-gray-600">
+          <p className={`text-xs ${design === 4 ? "text-[#5C3A1E]/40" : "text-gray-600"}`}>
             &copy; {new Date().getFullYear()} Music Corner. {s.footer.rights}
           </p>
         </div>
       </footer>
+
+      {/* Close Design 4 theme wrapper */}
+      </div>
     </>
   );
 }
