@@ -113,6 +113,24 @@ const t = {
       ],
       cta: "Contactez-nous pour reserver",
       note: "Les tarifs sont indicatifs. Contactez-nous pour un devis personnalise.",
+      book: "Reserver",
+      form: {
+        title: "Reserver un instrument",
+        name: "Nom complet",
+        email: "Email",
+        phone: "Telephone",
+        dates: "Dates souhaitees",
+        dateFrom: "Du",
+        dateTo: "Au",
+        message: "Message (optionnel)",
+        messagePlaceholder: "Precisions, questions...",
+        submit: "Envoyer la demande",
+        sending: "Envoi en cours...",
+        success: "Demande envoyee ! Nous vous recontacterons rapidement.",
+        error: "Erreur lors de l'envoi. Appelez-nous au 05 58 43 87 34.",
+        close: "Fermer",
+        instrument: "Instrument",
+      },
     },
     reviews: {
       title: "Avis Clients",
@@ -256,6 +274,24 @@ const t = {
       ],
       cta: "Contact us to book",
       note: "Prices are indicative. Contact us for a custom quote.",
+      book: "Book",
+      form: {
+        title: "Book an instrument",
+        name: "Full name",
+        email: "Email",
+        phone: "Phone",
+        dates: "Desired dates",
+        dateFrom: "From",
+        dateTo: "To",
+        message: "Message (optional)",
+        messagePlaceholder: "Any details or questions...",
+        submit: "Send request",
+        sending: "Sending...",
+        success: "Request sent! We'll get back to you shortly.",
+        error: "Error sending. Call us at 05 58 43 87 34.",
+        close: "Close",
+        instrument: "Instrument",
+      },
     },
     reviews: {
       title: "Customer Reviews",
@@ -469,9 +505,11 @@ const designConfigs = {
 
 export default function Home() {
   const [lang, setLang] = useState<"fr" | "en">("fr");
-  const [design, setDesign] = useState<1 | 2 | 3 | 4>(1);
+  const [design, setDesign] = useState<1 | 2 | 3 | 4>(4);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [bookingItem, setBookingItem] = useState<string | null>(null);
+  const [bookingStatus, setBookingStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const toggleMusic = () => {
@@ -484,6 +522,29 @@ export default function Home() {
     }
     setIsPlaying(!isPlaying);
   };
+
+  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setBookingStatus("sending");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    try {
+      const res = await fetch("https://formspree.io/f/xgobkgzn", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setBookingStatus("success");
+        form.reset();
+      } else {
+        setBookingStatus("error");
+      }
+    } catch {
+      setBookingStatus("error");
+    }
+  };
+
   const s = t[lang];
   const dc = designConfigs[design];
 
@@ -1035,7 +1096,7 @@ export default function Home() {
             {s.rental.items.map((item) => (
               <div
                 key={item.name}
-                className={`relative overflow-hidden p-6 ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow" : `card-hover bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                className={`relative overflow-hidden p-6 flex flex-col ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow" : `card-hover bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
               >
                 <div className={`absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg ${design === 4 ? "bg-[#D97706] text-white" : "rental-badge text-white"}`}>
                   {lang === "fr" ? "LOCATION" : "RENTAL"}
@@ -1044,21 +1105,126 @@ export default function Home() {
                 <p className={`font-semibold text-lg mb-2 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-gold)]"}`}>
                   {item.price}
                 </p>
-                <p className={`text-sm ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{item.desc}</p>
+                <p className={`text-sm mb-4 ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{item.desc}</p>
+                <button
+                  onClick={() => { setBookingItem(item.name); setBookingStatus("idle"); }}
+                  className={`mt-auto w-full py-2.5 text-sm font-semibold transition-colors cursor-pointer ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-lg hover:bg-[#7C2D12]" : `bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] ${design === 2 ? "rounded-none" : "rounded"}`}`}
+                >
+                  {s.rental.book}
+                </button>
               </div>
             ))}
           </div>
           <div className="text-center mt-8">
-            <a
-              href="tel:+33558438734"
-              className={`inline-block px-8 py-3 font-semibold transition-colors ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-full hover:bg-[#7C2D12]" : `bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] ${design === 2 ? "rounded-none" : "rounded"}`}`}
-            >
-              {s.rental.cta}
-            </a>
-            <p className={`text-xs mt-4 ${design === 4 ? "text-[#5C3A1E]/60" : "text-gray-500"}`}>{s.rental.note}</p>
+            <p className={`text-xs ${design === 4 ? "text-[#5C3A1E]/60" : "text-gray-500"}`}>{s.rental.note}</p>
           </div>
         </div>
       </section>
+
+      {/* Booking Modal */}
+      {bookingItem && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" onClick={() => { setBookingItem(null); setBookingStatus("idle"); }}>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div
+            className={`relative w-full max-w-md max-h-[90vh] overflow-y-auto p-6 sm:p-8 ${design === 4 ? "bg-[#FFFBEB] rounded-2xl border border-[#9A3412]/20" : `bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : "rounded-xl"}`}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => { setBookingItem(null); setBookingStatus("idle"); }}
+              className={`absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer ${design === 4 ? "text-[#3B1F0B] hover:bg-[#9A3412]/10" : "text-white hover:bg-white/10"}`}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            <h3 className={`text-xl font-bold mb-1 pr-8 ${design === 4 ? "text-[#3B1F0B]" : ""}`}>
+              {s.rental.form.title}
+            </h3>
+            <p className={`text-sm mb-6 ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-gold)]"}`}>
+              {bookingItem}
+            </p>
+
+            {bookingStatus === "success" ? (
+              <div className="text-center py-8">
+                <svg className={`w-16 h-16 mx-auto mb-4 ${design === 4 ? "text-green-700" : "text-green-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <p className={`font-semibold mb-6 ${design === 4 ? "text-[#3B1F0B]" : ""}`}>{s.rental.form.success}</p>
+                <button
+                  onClick={() => { setBookingItem(null); setBookingStatus("idle"); }}
+                  className={`px-6 py-2 font-semibold transition-colors cursor-pointer ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-full hover:bg-[#7C2D12]" : `bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] ${design === 2 ? "rounded-none" : "rounded"}`}`}
+                >
+                  {s.rental.form.close}
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleBookingSubmit} className="space-y-4">
+                <input type="hidden" name="_subject" value={`Reservation: ${bookingItem}`} />
+                <input type="hidden" name="instrument" value={bookingItem} />
+
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.name} *</label>
+                  <input
+                    type="text" name="name" required
+                    className={`w-full px-4 py-2.5 text-sm transition-colors ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] placeholder-[#5C3A1E]/40 focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.email} *</label>
+                  <input
+                    type="email" name="email" required
+                    className={`w-full px-4 py-2.5 text-sm transition-colors ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] placeholder-[#5C3A1E]/40 focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.phone}</label>
+                  <input
+                    type="tel" name="phone"
+                    className={`w-full px-4 py-2.5 text-sm transition-colors ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] placeholder-[#5C3A1E]/40 focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.dateFrom} *</label>
+                    <input
+                      type="date" name="date_from" required
+                      className={`w-full px-4 py-2.5 text-sm transition-colors ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                    />
+                  </div>
+                  <div>
+                    <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.dateTo} *</label>
+                    <input
+                      type="date" name="date_to" required
+                      className={`w-full px-4 py-2.5 text-sm transition-colors ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${design === 4 ? "text-[#3B1F0B]" : "text-gray-300"}`}>{s.rental.form.message}</label>
+                  <textarea
+                    name="message" rows={3}
+                    placeholder={s.rental.form.messagePlaceholder}
+                    className={`w-full px-4 py-2.5 text-sm transition-colors resize-none ${design === 4 ? "bg-white border border-[#9A3412]/20 rounded-lg text-[#3B1F0B] placeholder-[#5C3A1E]/40 focus:border-[#9A3412] focus:outline-none" : `bg-[#111] border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-accent)] focus:outline-none ${design === 2 ? "rounded-none" : "rounded-lg"}`}`}
+                  />
+                </div>
+
+                {bookingStatus === "error" && (
+                  <p className="text-red-500 text-sm">{s.rental.form.error}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={bookingStatus === "sending"}
+                  className={`w-full py-3 font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${design === 4 ? "bg-[#9A3412] text-[#FFFBEB] rounded-lg hover:bg-[#7C2D12]" : `bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] ${design === 2 ? "rounded-none" : "rounded"}`}`}
+                >
+                  {bookingStatus === "sending" ? s.rental.form.sending : s.rental.form.submit}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="section-divider max-w-4xl mx-auto" />
 
