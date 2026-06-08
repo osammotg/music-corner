@@ -479,7 +479,7 @@ const designConfigs = {
     serviceStyle: "detailed" as const,
   },
   4: {
-    heroImage: "/images/storefront.jpg",
+    heroImage: "/images/guitar-hero.jpg",
     heroOpacity: "opacity-100",
     aboutImage: "/images/shop-interior.webp",
     accentGradient: "",
@@ -704,7 +704,7 @@ export default function Home() {
       {design === 4 && (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFFBEB]">
           <div className="absolute inset-0">
-            <img src="/images/storefront.jpg" alt="Music Corner storefront" className="w-full h-full object-cover" />
+            <img src="/images/guitar-hero.jpg" alt="Music Corner" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#FFFBEB]/60 via-transparent to-[#FFFBEB]" />
           </div>
           <div className="relative z-10 text-center px-4 max-w-3xl mx-auto pt-20">
