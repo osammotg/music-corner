@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { GiGuitarBassHead, GiDrumKit, GiMusicalNotes, GiBookshelf, GiNecklaceDisplay } from "react-icons/gi";
 import { PiVinylRecordFill, PiHeadphonesFill, PiTShirtFill, PiGuitarFill, PiSpeakerHighFill, PiEarSlashFill, PiMusicNotesFill } from "react-icons/pi";
 
@@ -471,6 +471,19 @@ export default function Home() {
   const [lang, setLang] = useState<"fr" | "en">("fr");
   const [design, setDesign] = useState<1 | 2 | 3 | 4>(1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
   const s = t[lang];
   const dc = designConfigs[design];
 
@@ -486,23 +499,53 @@ export default function Home() {
 
   return (
     <>
+      {/* Audio element */}
+      <audio ref={audioRef} src="/audio/background-music.mp3" loop preload="none" />
+
       {/* Design Picker - fixed bar */}
       <div className={`fixed top-0 left-0 right-0 z-[60] border-b ${design === 4 ? "bg-[#FFFBEB] border-[#9A3412]/20" : "bg-[#0a0a0a] border-[var(--color-accent)]/30"}`}>
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3">
-          <span className={`text-xs hidden sm:inline ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{s.designPicker.label}:</span>
-          {([1, 2, 3, 4] as const).map((d) => (
-            <button
-              key={d}
-              onClick={() => setDesign(d)}
-              className={`px-4 py-1.5 text-sm font-semibold rounded transition-all cursor-pointer ${
-                design === d
-                  ? design === 4 ? "bg-[#9A3412] text-[#FFFBEB]" : "bg-[var(--color-accent)] text-white"
-                  : design === 4 ? "bg-white text-[#5C3A1E] border border-[#9A3412]/20 hover:border-[#9A3412] hover:text-[#9A3412]" : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)] hover:text-white"
-              }`}
-            >
-              {d === 1 ? s.designPicker.d1 : d === 2 ? s.designPicker.d2 : d === 3 ? s.designPicker.d3 : s.designPicker.d4}
-            </button>
-          ))}
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+          {/* Music player */}
+          <button
+            onClick={toggleMusic}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+              design === 4
+                ? isPlaying ? "bg-[#9A3412] text-[#FFFBEB]" : "bg-white text-[#5C3A1E] border border-[#9A3412]/20 hover:border-[#9A3412]"
+                : isPlaying ? "bg-[var(--color-accent)] text-white" : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)]"
+            }`}
+          >
+            {isPlaying ? (
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></svg>
+            ) : (
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+            )}
+            <span className="hidden sm:inline">{isPlaying ? (lang === "fr" ? "Pause" : "Pause") : (lang === "fr" ? "Ecouter" : "Listen")}</span>
+            {isPlaying && (
+              <span className="flex gap-[2px] items-end h-3">
+                <span className="w-[2px] bg-current animate-[bounce_0.6s_ease-in-out_infinite]" style={{ height: "8px" }} />
+                <span className="w-[2px] bg-current animate-[bounce_0.6s_ease-in-out_infinite_0.15s]" style={{ height: "12px" }} />
+                <span className="w-[2px] bg-current animate-[bounce_0.6s_ease-in-out_infinite_0.3s]" style={{ height: "6px" }} />
+              </span>
+            )}
+          </button>
+
+          {/* Design picker buttons */}
+          <div className="flex items-center gap-3">
+            <span className={`text-xs hidden sm:inline ${design === 4 ? "text-[#5C3A1E]" : "text-gray-400"}`}>{s.designPicker.label}:</span>
+            {([1, 2, 3, 4] as const).map((d) => (
+              <button
+                key={d}
+                onClick={() => setDesign(d)}
+                className={`px-4 py-1.5 text-sm font-semibold rounded transition-all cursor-pointer ${
+                  design === d
+                    ? design === 4 ? "bg-[#9A3412] text-[#FFFBEB]" : "bg-[var(--color-accent)] text-white"
+                    : design === 4 ? "bg-white text-[#5C3A1E] border border-[#9A3412]/20 hover:border-[#9A3412] hover:text-[#9A3412]" : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)] hover:text-white"
+                }`}
+              >
+                {d === 1 ? s.designPicker.d1 : d === 2 ? s.designPicker.d2 : d === 3 ? s.designPicker.d3 : s.designPicker.d4}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
