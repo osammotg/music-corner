@@ -705,26 +705,26 @@ export default function Home() {
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFFBEB]">
           <div className="absolute inset-0">
             <img src="/images/guitar-hero.jpg" alt="Music Corner" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FFFBEB]/60 via-transparent to-[#FFFBEB]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#3B1F0B]/70 via-[#3B1F0B]/40 to-[#FFFBEB]" />
           </div>
           <div className="relative z-10 text-center px-4 max-w-3xl mx-auto pt-20">
-            <img src="/images/logo.png" alt="Music Corner" className="h-28 sm:h-36 w-auto mx-auto mb-8" />
-            <div className="w-20 h-[2px] bg-[#9A3412] mx-auto mb-6" />
-            <p className="text-xl sm:text-2xl text-[#3B1F0B] mb-4 tracking-wide" style={{ fontFamily: "'Abril Fatface', serif" }}>
+            <img src="/images/logo.png" alt="Music Corner" className="h-28 sm:h-36 w-auto mx-auto mb-8 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
+            <div className="w-20 h-[2px] bg-[#D97706] mx-auto mb-6" />
+            <p className="text-xl sm:text-2xl text-[#FFFBEB] mb-4 tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" style={{ fontFamily: "'Abril Fatface', serif" }}>
               {s.hero.tagline}
             </p>
-            <p className="text-lg text-[#5C3A1E] max-w-xl mx-auto mb-10 leading-relaxed" style={{ fontFamily: "'Merriweather', serif" }}>
+            <p className="text-lg text-[#FFFBEB]/90 max-w-xl mx-auto mb-10 leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" style={{ fontFamily: "'Merriweather', serif" }}>
               {s.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="#services" className="px-8 py-3.5 bg-[#9A3412] text-[#FFFBEB] font-semibold rounded-full hover:bg-[#7C2D12] transition-colors text-center cursor-pointer" style={{ fontFamily: "'Merriweather', serif" }}>
                 {s.hero.cta}
               </a>
-              <a href="#contact" className="px-8 py-3.5 border-2 border-[#9A3412] text-[#9A3412] font-semibold rounded-full hover:bg-[#9A3412]/10 transition-colors text-center cursor-pointer" style={{ fontFamily: "'Merriweather', serif" }}>
+              <a href="#contact" className="px-8 py-3.5 border-2 border-[#FFFBEB]/60 text-[#FFFBEB] font-semibold rounded-full hover:bg-[#FFFBEB]/10 transition-colors text-center cursor-pointer" style={{ fontFamily: "'Merriweather', serif" }}>
                 {s.hero.ctaContact}
               </a>
             </div>
-            <div className="mt-12 flex items-center justify-center gap-2 text-sm text-[#5C3A1E]">
+            <div className="mt-12 flex items-center justify-center gap-2 text-sm text-[#FFFBEB]/80">
               <Stars count={5} />
               <span className="ml-1">5.0 / 5</span>
               <span>-</span>
