@@ -522,7 +522,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <a href="#" className="flex items-center">
-              <img src="/images/logo.png" alt="Music Corner" className="h-10 w-auto brightness-0 invert" />
+              <img src="/images/logo.png" alt="Music Corner" className="h-10 w-auto drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]" />
             </a>
 
             {/* Desktop nav */}
@@ -1153,7 +1153,7 @@ export default function Home() {
       <footer className="py-8 px-4 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center">
-            <img src="/images/logo.png" alt="Music Corner" className="h-8 w-auto brightness-0 invert" />
+            <img src="/images/logo.png" alt="Music Corner" className="h-8 w-auto drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]" />
           </div>
           <p className="text-sm text-gray-500">
             {s.footer.tagline}
