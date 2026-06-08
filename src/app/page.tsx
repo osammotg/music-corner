@@ -602,10 +602,7 @@ export default function Home() {
         <section className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
           <div className={`absolute inset-0 bg-[url('/images/shop-interior.webp')] bg-cover bg-center ${dc.heroOpacity}`} />
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2">
-              MUSIC
-              <span className="text-[var(--color-accent)]"> CORNER</span>
-            </h1>
+            <img src="/images/logo.png" alt="Music Corner" className="h-28 sm:h-40 w-auto mx-auto mb-2 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
             <p className="text-xl sm:text-2xl font-[family-name:var(--font-heading)] text-[var(--color-gold)] tracking-widest mb-6">
               {s.hero.tagline}
             </p>
@@ -644,11 +641,7 @@ export default function Home() {
             <div className="inline-block mb-6 px-4 py-1 border border-[var(--color-gold)]/30 rounded-full">
               <span className="text-sm text-[var(--color-gold)] tracking-widest uppercase">Soorts-Hossegor</span>
             </div>
-            <h1 className="text-7xl sm:text-9xl font-bold tracking-wider mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-              MUSIC
-              <br />
-              <span className="text-[var(--color-accent)]">CORNER</span>
-            </h1>
+            <img src="/images/logo.png" alt="Music Corner" className="h-32 sm:h-44 w-auto mx-auto mb-4 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
             <div className="w-24 h-[2px] bg-[var(--color-gold)] mx-auto mb-6" />
             <p className="text-xl sm:text-2xl text-[var(--color-gold)] tracking-[0.3em] mb-6 uppercase" style={{ fontFamily: "var(--font-heading)" }}>
               {s.hero.tagline}
@@ -682,11 +675,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 to-transparent" />
           </div>
           <div className="relative z-10 px-4 sm:px-12 pb-20 pt-40 max-w-3xl">
-            <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2 leading-[0.9]">
-              MUSIC
-              <br />
-              <span className="text-[var(--color-accent)]">CORNER</span>
-            </h1>
+            <img src="/images/logo.png" alt="Music Corner" className="h-28 sm:h-40 w-auto mb-2 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
             <div className="w-16 h-1 bg-[var(--color-accent)] mt-4 mb-6" />
             <p className="text-xl sm:text-2xl font-[family-name:var(--font-heading)] text-[var(--color-gold)] tracking-widest mb-4">
               {s.hero.tagline}
