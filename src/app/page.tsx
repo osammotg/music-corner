@@ -15,14 +15,14 @@ const t = {
     hero: {
       tagline: "Repair, Merch & More",
       subtitle:
-        "Magasin de musique, atelier de reparations et tout sur l'univers musical.",
+        "Magasin de musique, atelier de reparations et tout sur l'univers musical. Livres, vinyles, deco, tshirts, jouets...",
       cta: "Decouvrir",
       ctaContact: "Nous contacter",
     },
     about: {
       title: "A propos",
-      p1: "Music Corner est un concept store dedie a la musique, situe a Soorts-Hossegor, au coeur des Landes. Nous proposons la vente et la reparation d'instruments de musique neufs et d'occasion.",
-      p2: "Nous sommes egalement revendeur agree Marshall pour les amplis, enceintes et casques. Notre equipe passionnee vous accueille du mardi au samedi pour vous conseiller et partager notre amour de la musique.",
+      p1: "Decouvrez Music Corner, le concept store incontournable dedie a la musique a Hossegor. Pedro et Tom y ont cree un espace ou se melent passion et expertise pour offrir aux melomanes une selection d'instruments de musique, de materiel, et bien plus encore. Que vous soyez debutant, musicien confirme ou simple amateur de musique, vous y trouverez des instruments, des accessoires, ainsi qu'une large gamme de vinyles, tee-shirts, objets de decoration et beaux livres.",
+      p2: "L'ambiance chaleureuse du lieu invite a l'exploration de differents genres musicaux, chacun pouvant y trouver son bonheur. Music Corner est un veritable temple pour tous les passionnes de musique, ou qualite et convivialite sont les maitres mots.",
       marshall: "Revendeur agree",
       dsdrum: "Revendeur agree",
     },
@@ -30,7 +30,7 @@ const t = {
       title: "Nos Services",
       repair: {
         title: "Atelier de reparation",
-        desc: "Reparation de guitares, basses, ukuleles, batteries et plus. Montage, accordage, entretien et changement de pieces.",
+        desc: "Tom, forme comme guitar-tech et drum-tech, propose un service de reparation de guitares, basses et batteries. Un service sur mesure pour redonner vie a vos instruments.",
         details: [
           "Reglage et ajustement de manche",
           "Changement de cordes et mecaniques",
@@ -157,14 +157,14 @@ const t = {
     hero: {
       tagline: "Repair, Merch & More",
       subtitle:
-        "Music shop, repair workshop and everything about the musical universe.",
+        "Music shop, repair workshop and everything about the musical universe. Books, vinyl, decor, t-shirts, toys...",
       cta: "Discover",
       ctaContact: "Contact us",
     },
     about: {
       title: "About us",
-      p1: "Music Corner is a concept store dedicated to music, located in Soorts-Hossegor, in the heart of the Landes region. We offer sales and repair of new and second-hand musical instruments.",
-      p2: "We are also an authorized Marshall dealer for amps, speakers and headphones. Our passionate team welcomes you from Tuesday to Saturday to advise you and share our love of music.",
+      p1: "Discover Music Corner, the must-visit concept store dedicated to music in Hossegor. Pedro and Tom have created a space where passion meets expertise, offering music lovers a curated selection of instruments, gear, and much more. Whether you're a beginner, an experienced musician, or simply a music enthusiast, you'll find instruments, accessories, as well as a wide range of vinyl records, t-shirts, decorative items, and beautiful books.",
+      p2: "The warm atmosphere of the shop invites you to explore different musical genres, with something for everyone. Music Corner is a true temple for all music lovers, where quality and friendliness are the guiding principles.",
       marshall: "Authorized dealer",
       dsdrum: "Authorized dealer",
     },
@@ -172,7 +172,7 @@ const t = {
       title: "Our Services",
       repair: {
         title: "Repair Workshop",
-        desc: "Repair of guitars, basses, ukuleles, drums and more. Assembly, tuning, maintenance and parts replacement.",
+        desc: "Tom, trained as a guitar-tech and drum-tech, offers a repair service for guitars, basses, and drums. A bespoke service to bring your instruments back to life.",
         details: [
           "Neck adjustment and setup",
           "String and tuner replacement",
