@@ -31,14 +31,32 @@ const t = {
       repair: {
         title: "Atelier de reparation",
         desc: "Reparation de guitares, basses, ukuleles, batteries et plus. Montage, accordage, entretien et changement de pieces.",
+        details: [
+          "Reglage et ajustement de manche",
+          "Changement de cordes et mecaniques",
+          "Electronique et soudure",
+          "Restauration complete",
+        ],
       },
       sell: {
         title: "Vente d'instruments",
         desc: "Instruments neufs et d'occasion : guitares, basses, ukuleles, batteries, percussions et accessoires.",
+        details: [
+          "Guitares acoustiques et electriques",
+          "Amplis Marshall et plus",
+          "Batteries DS Drum",
+          "Accessoires et consommables",
+        ],
       },
       advice: {
         title: "Conseil expert",
         desc: "Notre equipe de passionnes vous guide dans le choix de votre instrument, que vous soyez debutant ou professionnel.",
+        details: [
+          "Essai en magasin",
+          "Accompagnement personnalise",
+          "Recommandations sur mesure",
+          "Suivi apres-vente",
+        ],
       },
     },
     products: {
@@ -120,6 +138,12 @@ const t = {
       rights: "Tous droits reserves.",
       tagline: "Repair, Merch & More - Soorts-Hossegor, France",
     },
+    designPicker: {
+      label: "Choisissez un design",
+      d1: "Classique",
+      d2: "Vinyle",
+      d3: "Scene",
+    },
   },
   en: {
     nav: {
@@ -149,14 +173,32 @@ const t = {
       repair: {
         title: "Repair Workshop",
         desc: "Repair of guitars, basses, ukuleles, drums and more. Assembly, tuning, maintenance and parts replacement.",
+        details: [
+          "Neck adjustment and setup",
+          "String and tuner replacement",
+          "Electronics and soldering",
+          "Full restoration",
+        ],
       },
       sell: {
         title: "Instrument Sales",
         desc: "New and second-hand instruments: guitars, basses, ukuleles, drums, percussion and accessories.",
+        details: [
+          "Acoustic and electric guitars",
+          "Marshall amps and more",
+          "DS Drum kits",
+          "Accessories and consumables",
+        ],
       },
       advice: {
         title: "Expert Advice",
         desc: "Our team of enthusiasts guides you in choosing your instrument, whether you are a beginner or a professional.",
+        details: [
+          "Try in store",
+          "Personalized guidance",
+          "Tailored recommendations",
+          "After-sales support",
+        ],
       },
     },
     products: {
@@ -238,6 +280,12 @@ const t = {
       rights: "All rights reserved.",
       tagline: "Repair, Merch & More - Soorts-Hossegor, France",
     },
+    designPicker: {
+      label: "Choose a design",
+      d1: "Classic",
+      d2: "Vinyl",
+      d3: "Stage",
+    },
   },
 };
 
@@ -299,19 +347,42 @@ const reviews = [
 ];
 
 const productIcons: Record<string, string> = {
-  guitars: "🎸",
-  drums: "🥁",
-  ukuleles: "🪕",
-  amps: "🔊",
-  vinyl: "💿",
-  books: "📚",
-  accessories: "🎵",
-  merch: "👕",
-  decor: "🎶",
-  headphones: "🎧",
-  earprotection: "🔇",
-  strings: "🎻",
+  guitars: "guitar",
+  drums: "drums",
+  ukuleles: "ukulele",
+  amps: "amp",
+  vinyl: "vinyl",
+  books: "books",
+  accessories: "accessories",
+  merch: "merch",
+  decor: "decor",
+  headphones: "headphones",
+  earprotection: "earprotection",
+  strings: "strings",
 };
+
+function ProductIcon({ type, className = "w-8 h-8" }: { type: string; className?: string }) {
+  const icons: Record<string, React.ReactNode> = {
+    guitar: (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-10.5M18.5.5l5 5M12 12a3 3 0 11-6 0 3 3 0 016 0zM3.5 20.5a3 3 0 004.243 0l2.121-2.121a3 3 0 000-4.243L7.743 12.01a3 3 0 00-4.243 0L1.379 14.13a3 3 0 000 4.243L3.5 20.5z" />
+      </svg>
+    ),
+    drums: (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <ellipse cx="12" cy="14" rx="9" ry="4" />
+        <path d="M3 14V8c0-2.21 4.03-4 9-4s9 1.79 9 4v6" />
+        <ellipse cx="12" cy="8" rx="9" ry="4" />
+      </svg>
+    ),
+    default: (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-10.5M18.5.5l5 5M12 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  };
+  return <>{icons[type] || icons.default}</>;
+}
 
 function Stars({ count }: { count: number }) {
   return (
@@ -379,10 +450,40 @@ function ClockIcon() {
   );
 }
 
+// ── Design-specific configs ──────────────────────────────────────────
+const designConfigs = {
+  1: {
+    heroImage: "/images/festival.jpg",
+    heroOpacity: "opacity-15",
+    aboutImage: "/images/drums.jpg",
+    accentGradient: "from-[#e63946]/12 via-[#0a0a0a]/97 to-[#d4a853]/8",
+    serviceBg: "bg-[#1a1a1a]",
+    serviceStyle: "simple" as const,
+  },
+  2: {
+    heroImage: "/images/vinyl.jpg",
+    heroOpacity: "opacity-20",
+    aboutImage: "/images/culture.jpg",
+    accentGradient: "from-[#d4a853]/15 via-[#0a0a0a]/95 to-[#e63946]/10",
+    serviceBg: "bg-gradient-to-b from-[#1a1a1a] to-[#111]",
+    serviceStyle: "detailed" as const,
+  },
+  3: {
+    heroImage: "/images/guitar-hero.jpg",
+    heroOpacity: "opacity-30",
+    aboutImage: "/images/merch.jpg",
+    accentGradient: "from-[#e63946]/20 via-[#0a0a0a]/90 to-[#1a1a1a]/80",
+    serviceBg: "bg-[#1a1a1a]",
+    serviceStyle: "detailed" as const,
+  },
+};
+
 export default function Home() {
   const [lang, setLang] = useState<"fr" | "en">("fr");
+  const [design, setDesign] = useState<1 | 2 | 3>(1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const s = t[lang];
+  const dc = designConfigs[design];
 
   const hours = [
     { day: s.contact.monday, time: s.contact.closed },
@@ -396,8 +497,28 @@ export default function Home() {
 
   return (
     <>
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 nav-blur bg-black/80 border-b border-white/5">
+      {/* Design Picker - fixed bar */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-[#0a0a0a] border-b border-[var(--color-accent)]/30">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3">
+          <span className="text-xs text-gray-400 hidden sm:inline">{s.designPicker.label}:</span>
+          {([1, 2, 3] as const).map((d) => (
+            <button
+              key={d}
+              onClick={() => setDesign(d)}
+              className={`px-4 py-1.5 text-sm font-semibold rounded transition-all ${
+                design === d
+                  ? "bg-[var(--color-accent)] text-white"
+                  : "bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-[var(--color-accent)] hover:text-white"
+              }`}
+            >
+              {d === 1 ? s.designPicker.d1 : d === 2 ? s.designPicker.d2 : s.designPicker.d3}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation - offset for design picker */}
+      <nav className="fixed top-[44px] left-0 right-0 z-50 nav-blur bg-black/80 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <a href="#" className="flex items-center gap-2">
@@ -468,49 +589,122 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/festival.jpg')] bg-cover bg-center opacity-15" />
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2">
-            MUSIC
-            <span className="text-[var(--color-accent)]"> CORNER</span>
-          </h1>
-          <p className="text-xl sm:text-2xl font-[family-name:var(--font-heading)] text-[var(--color-gold)] tracking-widest mb-6">
-            {s.hero.tagline}
-          </p>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            {s.hero.subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#services"
-              className="px-8 py-3 bg-[var(--color-accent)] text-white font-semibold rounded hover:bg-[var(--color-accent-hover)] transition-colors text-center"
-            >
-              {s.hero.cta}
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-3 border border-white/30 text-white font-semibold rounded hover:border-white hover:bg-white/5 transition-colors text-center"
-            >
-              {s.hero.ctaContact}
-            </a>
+      {/* ── HERO ── */}
+      {design === 1 && (
+        <section className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
+          <div className={`absolute inset-0 bg-[url('/images/festival.jpg')] bg-cover bg-center ${dc.heroOpacity}`} />
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2">
+              MUSIC
+              <span className="text-[var(--color-accent)]"> CORNER</span>
+            </h1>
+            <p className="text-xl sm:text-2xl font-[family-name:var(--font-heading)] text-[var(--color-gold)] tracking-widest mb-6">
+              {s.hero.tagline}
+            </p>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
+              {s.hero.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#services" className="px-8 py-3 bg-[var(--color-accent)] text-white font-semibold rounded hover:bg-[var(--color-accent-hover)] transition-colors text-center">
+                {s.hero.cta}
+              </a>
+              <a href="#contact" className="px-8 py-3 border border-white/30 text-white font-semibold rounded hover:border-white hover:bg-white/5 transition-colors text-center">
+                {s.hero.ctaContact}
+              </a>
+            </div>
+            <div className="mt-12 flex items-center justify-center gap-2 text-sm text-gray-400">
+              <Stars count={5} />
+              <span className="ml-1">5.0 / 5</span>
+              <span>-</span>
+              <span>37 {s.reviews.googleRating}</span>
+            </div>
           </div>
-          <div className="mt-12 flex items-center justify-center gap-2 text-sm text-gray-400">
-            <Stars count={5} />
-            <span className="ml-1">5.0 / 5</span>
-            <span>-</span>
-            <span>37 {s.reviews.googleRating}</span>
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg className="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
-        </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* About */}
+      {design === 2 && (
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#d4a853]/15 via-[#0a0a0a]/95 to-[#e63946]/10" />
+          <div className={`absolute inset-0 bg-[url('/images/vinyl.jpg')] bg-cover bg-center opacity-20`} />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+')] opacity-40" />
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div className="inline-block mb-6 px-4 py-1 border border-[var(--color-gold)]/30 rounded-full">
+              <span className="text-sm text-[var(--color-gold)] tracking-widest uppercase">Soorts-Hossegor</span>
+            </div>
+            <h1 className="text-7xl sm:text-9xl font-bold tracking-wider mb-4" style={{ fontFamily: "var(--font-heading)" }}>
+              MUSIC
+              <br />
+              <span className="text-[var(--color-accent)]">CORNER</span>
+            </h1>
+            <div className="w-24 h-[2px] bg-[var(--color-gold)] mx-auto mb-6" />
+            <p className="text-xl sm:text-2xl text-[var(--color-gold)] tracking-[0.3em] mb-6 uppercase" style={{ fontFamily: "var(--font-heading)" }}>
+              {s.hero.tagline}
+            </p>
+            <p className="text-lg text-gray-400 max-w-xl mx-auto mb-12 leading-relaxed">
+              {s.hero.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#services" className="px-10 py-4 bg-[var(--color-accent)] text-white font-semibold rounded-none border-2 border-[var(--color-accent)] hover:bg-transparent hover:text-[var(--color-accent)] transition-all text-center tracking-wider uppercase text-sm">
+                {s.hero.cta}
+              </a>
+              <a href="#contact" className="px-10 py-4 border-2 border-[var(--color-gold)]/40 text-[var(--color-gold)] font-semibold rounded-none hover:border-[var(--color-gold)] hover:bg-[var(--color-gold)]/10 transition-all text-center tracking-wider uppercase text-sm">
+                {s.hero.ctaContact}
+              </a>
+            </div>
+            <div className="mt-16 flex items-center justify-center gap-3 text-sm text-gray-500">
+              <Stars count={5} />
+              <span>5.0 / 5</span>
+              <span className="text-gray-600">|</span>
+              <span>37 {s.reviews.googleRating}</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {design === 3 && (
+        <section className="relative min-h-screen flex items-end overflow-hidden">
+          <div className="absolute inset-0">
+            <img src="/images/guitar-hero.jpg" alt="Guitar" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 to-transparent" />
+          </div>
+          <div className="relative z-10 px-4 sm:px-12 pb-20 pt-40 max-w-3xl">
+            <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2 leading-[0.9]">
+              MUSIC
+              <br />
+              <span className="text-[var(--color-accent)]">CORNER</span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-accent)] mt-4 mb-6" />
+            <p className="text-xl sm:text-2xl font-[family-name:var(--font-heading)] text-[var(--color-gold)] tracking-widest mb-4">
+              {s.hero.tagline}
+            </p>
+            <p className="text-lg text-gray-300 max-w-lg mb-10 leading-relaxed">
+              {s.hero.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="#services" className="px-8 py-3.5 bg-[var(--color-accent)] text-white font-bold rounded-sm hover:bg-[var(--color-accent-hover)] transition-colors text-center uppercase tracking-wider text-sm">
+                {s.hero.cta}
+              </a>
+              <a href="#contact" className="px-8 py-3.5 border-2 border-white/30 text-white font-bold rounded-sm hover:border-white hover:bg-white/10 transition-colors text-center uppercase tracking-wider text-sm">
+                {s.hero.ctaContact}
+              </a>
+            </div>
+            <div className="mt-10 flex items-center gap-2 text-sm text-gray-400">
+              <Stars count={5} />
+              <span className="ml-1">5.0 / 5</span>
+              <span>-</span>
+              <span>37 {s.reviews.googleRating}</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── ABOUT ── */}
       <section id="about" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">
@@ -536,14 +730,14 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/3] rounded-lg overflow-hidden bg-[#1a1a1a] border border-white/10">
+              <div className={`aspect-[4/3] rounded-lg overflow-hidden bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none" : ""}`}>
                 <img
-                  src="/images/drums.jpg"
-                  alt="Music Corner - DS Drum at the shop"
+                  src={dc.aboutImage}
+                  alt="Music Corner shop"
                   className="w-full h-full object-cover opacity-90"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-[var(--color-accent)] text-white px-6 py-3 rounded-lg font-bold text-sm">
+              <div className={`absolute -bottom-4 -right-4 bg-[var(--color-accent)] text-white px-6 py-3 font-bold text-sm ${design === 2 ? "rounded-none" : "rounded-lg"}`}>
                 SOORTS-HOSSEGOR
               </div>
             </div>
@@ -553,28 +747,102 @@ export default function Home() {
 
       <div className="section-divider max-w-4xl mx-auto" />
 
-      {/* Services */}
+      {/* ── SERVICES ── */}
       <section id="services" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">
+          <h2 className="text-4xl font-bold text-center mb-4">
             {s.services.title}
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { icon: <WrenchIcon />, ...s.services.repair },
-              { icon: <ShoppingIcon />, ...s.services.sell },
-              { icon: <ChatIcon />, ...s.services.advice },
-            ].map((service) => (
-              <div
-                key={service.title}
-                className="card-hover bg-[#1a1a1a] border border-white/10 rounded-lg p-8 text-center"
-              >
-                <div className="flex justify-center mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{service.desc}</p>
-              </div>
-            ))}
-          </div>
+          {(design === 2 || design === 3) && (
+            <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+              {lang === "fr"
+                ? "Un savoir-faire artisanal au service de votre passion musicale"
+                : "Craftsmanship at the service of your musical passion"}
+            </p>
+          )}
+          {design === 1 && <div className="mb-12" />}
+
+          {design === 1 ? (
+            /* Design 1: Simple cards */
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { icon: <WrenchIcon />, ...s.services.repair },
+                { icon: <ShoppingIcon />, ...s.services.sell },
+                { icon: <ChatIcon />, ...s.services.advice },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="card-hover bg-[#1a1a1a] border border-white/10 rounded-lg p-8 text-center"
+                >
+                  <div className="flex justify-center mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{service.desc}</p>
+                </div>
+              ))}
+            </div>
+          ) : design === 2 ? (
+            /* Design 2: Vinyl - horizontal cards with details + gold accents */
+            <div className="space-y-6">
+              {[
+                { icon: <WrenchIcon />, ...s.services.repair, num: "01" },
+                { icon: <ShoppingIcon />, ...s.services.sell, num: "02" },
+                { icon: <ChatIcon />, ...s.services.advice, num: "03" },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="group bg-gradient-to-r from-[#1a1a1a] to-[#111] border border-white/5 p-8 hover:border-[var(--color-gold)]/30 transition-all"
+                >
+                  <div className="flex flex-col md:flex-row md:items-start gap-6">
+                    <div className="flex items-center gap-4 md:w-1/3">
+                      <span className="text-3xl font-bold text-[var(--color-gold)]/20 font-[family-name:var(--font-heading)]">{service.num}</span>
+                      <div>
+                        <h3 className="text-xl font-bold mb-1">{service.title}</h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
+                      </div>
+                    </div>
+                    <div className="md:w-2/3 grid grid-cols-2 gap-3">
+                      {service.details.map((detail) => (
+                        <div key={detail} className="flex items-center gap-2 text-sm text-gray-300">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+                          {detail}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Design 3: Stage - large cards with left border accent + details */
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { icon: <WrenchIcon />, ...s.services.repair },
+                { icon: <ShoppingIcon />, ...s.services.sell },
+                { icon: <ChatIcon />, ...s.services.advice },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="card-hover bg-[#1a1a1a] border-l-4 border-l-[var(--color-accent)] border border-white/5 rounded-sm p-8"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    {service.icon}
+                    <h3 className="text-xl font-bold">{service.title}</h3>
+                  </div>
+                  <p className="text-gray-400 leading-relaxed mb-4">{service.desc}</p>
+                  <ul className="space-y-2">
+                    {service.details.map((detail) => (
+                      <li key={detail} className="flex items-center gap-2 text-sm text-gray-300">
+                        <svg className="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -586,15 +854,17 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12">
             {s.products.title}
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 ${design === 2 ? "[&>*]:rounded-none" : ""}`}>
             {Object.entries(s.products)
               .filter(([key]) => key !== "title")
               .map(([key, label]) => (
                 <div
                   key={key}
-                  className="card-hover bg-[#1a1a1a] border border-white/10 rounded-lg p-6 text-center"
+                  className={`card-hover bg-[#1a1a1a] border border-white/10 p-6 text-center ${design === 2 ? "rounded-none hover:border-[var(--color-gold)]/40" : "rounded-lg"}`}
                 >
-                  <span className="text-3xl mb-3 block">{productIcons[key]}</span>
+                  <div className="mb-3 flex justify-center text-[var(--color-accent)]">
+                    <ProductIcon type={productIcons[key]} className="w-8 h-8" />
+                  </div>
                   <span className="text-sm font-semibold text-gray-200">
                     {label}
                   </span>
@@ -620,7 +890,7 @@ export default function Home() {
           >
             {s.instagram.subtitle}
           </a>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 ${design === 2 ? "[&>*]:rounded-none" : ""}`}>
             {[
               { src: "/images/culture.jpg", alt: "Music culture & history" },
               { src: "/images/vinyl.jpg", alt: "Vinyl records" },
@@ -634,7 +904,7 @@ export default function Home() {
                 href="https://www.instagram.com/musiccorner_hossegor/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative aspect-square overflow-hidden rounded-lg bg-[#1a1a1a]"
+                className={`group relative aspect-square overflow-hidden bg-[#1a1a1a] ${design === 2 ? "rounded-none" : "rounded-lg"}`}
               >
                 <img
                   src={img.src}
@@ -671,7 +941,7 @@ export default function Home() {
             {s.rental.items.map((item) => (
               <div
                 key={item.name}
-                className="card-hover bg-[#1a1a1a] border border-white/10 rounded-lg p-6 relative overflow-hidden"
+                className={`card-hover bg-[#1a1a1a] border border-white/10 p-6 relative overflow-hidden ${design === 2 ? "rounded-none" : "rounded-lg"}`}
               >
                 <div className="absolute top-0 right-0 rental-badge text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                   {lang === "fr" ? "LOCATION" : "RENTAL"}
@@ -687,7 +957,7 @@ export default function Home() {
           <div className="text-center mt-8">
             <a
               href="tel:+33558438734"
-              className="inline-block px-8 py-3 bg-[var(--color-accent)] text-white font-semibold rounded hover:bg-[var(--color-accent-hover)] transition-colors"
+              className={`inline-block px-8 py-3 bg-[var(--color-accent)] text-white font-semibold hover:bg-[var(--color-accent-hover)] transition-colors ${design === 2 ? "rounded-none" : "rounded"}`}
             >
               {s.rental.cta}
             </a>
@@ -715,7 +985,7 @@ export default function Home() {
             {reviews.map((review) => (
               <div
                 key={review.name}
-                className="bg-[#1a1a1a] border border-white/10 rounded-lg p-6"
+                className={`bg-[#1a1a1a] border border-white/10 p-6 ${design === 2 ? "rounded-none" : "rounded-lg"}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
