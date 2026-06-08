@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { GiGuitarBassHead, GiDrumKit, GiMusicalNotes, GiBookshelf, GiNecklaceDisplay } from "react-icons/gi";
+import { PiVinylRecordFill, PiHeadphonesFill, PiTShirtFill, PiGuitarFill, PiSpeakerHighFill, PiEarSlashFill, PiMusicNotesFill } from "react-icons/pi";
 
 const t = {
   fr: {
@@ -348,43 +350,20 @@ const reviews = [
   },
 ];
 
-const productIcons: Record<string, string> = {
-  guitars: "guitar",
-  drums: "drums",
-  ukuleles: "ukulele",
-  amps: "amp",
-  vinyl: "vinyl",
-  books: "books",
-  accessories: "accessories",
-  merch: "merch",
-  decor: "decor",
-  headphones: "headphones",
-  earprotection: "earprotection",
-  strings: "strings",
+const productIcons: Record<string, React.ReactNode> = {
+  guitars: <GiGuitarBassHead className="w-8 h-8" />,
+  drums: <GiDrumKit className="w-8 h-8" />,
+  ukuleles: <PiGuitarFill className="w-8 h-8" />,
+  amps: <PiSpeakerHighFill className="w-8 h-8" />,
+  vinyl: <PiVinylRecordFill className="w-8 h-8" />,
+  books: <GiBookshelf className="w-8 h-8" />,
+  accessories: <GiMusicalNotes className="w-8 h-8" />,
+  merch: <PiTShirtFill className="w-8 h-8" />,
+  decor: <GiNecklaceDisplay className="w-8 h-8" />,
+  headphones: <PiHeadphonesFill className="w-8 h-8" />,
+  earprotection: <PiEarSlashFill className="w-8 h-8" />,
+  strings: <PiMusicNotesFill className="w-8 h-8" />,
 };
-
-function ProductIcon({ type, className = "w-8 h-8" }: { type: string; className?: string }) {
-  const icons: Record<string, React.ReactNode> = {
-    guitar: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-10.5M18.5.5l5 5M12 12a3 3 0 11-6 0 3 3 0 016 0zM3.5 20.5a3 3 0 004.243 0l2.121-2.121a3 3 0 000-4.243L7.743 12.01a3 3 0 00-4.243 0L1.379 14.13a3 3 0 000 4.243L3.5 20.5z" />
-      </svg>
-    ),
-    drums: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <ellipse cx="12" cy="14" rx="9" ry="4" />
-        <path d="M3 14V8c0-2.21 4.03-4 9-4s9 1.79 9 4v6" />
-        <ellipse cx="12" cy="8" rx="9" ry="4" />
-      </svg>
-    ),
-    default: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-10.5M18.5.5l5 5M12 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-  };
-  return <>{icons[type] || icons.default}</>;
-}
 
 function Stars({ count }: { count: number }) {
   return (
@@ -933,7 +912,7 @@ export default function Home() {
                   className={`p-6 text-center ${design === 4 ? "bg-white rounded-xl border border-[#9A3412]/10 shadow-sm hover:shadow-md transition-shadow" : `card-hover bg-[#1a1a1a] border border-white/10 ${design === 2 ? "rounded-none hover:border-[var(--color-gold)]/40" : "rounded-lg"}`}`}
                 >
                   <div className={`mb-3 flex justify-center ${design === 4 ? "text-[#9A3412]" : "text-[var(--color-accent)]"}`}>
-                    <ProductIcon type={productIcons[key]} className="w-8 h-8" />
+                    {productIcons[key] || <GiMusicalNotes className="w-8 h-8" />}
                   </div>
                   <span className={`text-sm font-semibold ${design === 4 ? "text-[#3B1F0B]" : "text-gray-200"}`}>
                     {label}
