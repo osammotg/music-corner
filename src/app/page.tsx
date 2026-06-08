@@ -453,17 +453,17 @@ function ClockIcon() {
 // ── Design-specific configs ──────────────────────────────────────────
 const designConfigs = {
   1: {
-    heroImage: "/images/festival.jpg",
-    heroOpacity: "opacity-15",
-    aboutImage: "/images/drums.jpg",
+    heroImage: "/images/shop-interior.webp",
+    heroOpacity: "opacity-20",
+    aboutImage: "/images/storefront.jpg",
     accentGradient: "from-[#e63946]/12 via-[#0a0a0a]/97 to-[#d4a853]/8",
     serviceBg: "bg-[#1a1a1a]",
     serviceStyle: "simple" as const,
   },
   2: {
-    heroImage: "/images/vinyl.jpg",
-    heroOpacity: "opacity-20",
-    aboutImage: "/images/culture.jpg",
+    heroImage: "/images/storefront.jpg",
+    heroOpacity: "opacity-15",
+    aboutImage: "/images/shop-interior.webp",
     accentGradient: "from-[#d4a853]/15 via-[#0a0a0a]/95 to-[#e63946]/10",
     serviceBg: "bg-gradient-to-b from-[#1a1a1a] to-[#111]",
     serviceStyle: "detailed" as const,
@@ -471,7 +471,7 @@ const designConfigs = {
   3: {
     heroImage: "/images/guitar-hero.jpg",
     heroOpacity: "opacity-30",
-    aboutImage: "/images/merch.jpg",
+    aboutImage: "/images/shop-interior.webp",
     accentGradient: "from-[#e63946]/20 via-[#0a0a0a]/90 to-[#1a1a1a]/80",
     serviceBg: "bg-[#1a1a1a]",
     serviceStyle: "detailed" as const,
@@ -592,7 +592,7 @@ export default function Home() {
       {/* ── HERO ── */}
       {design === 1 && (
         <section className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
-          <div className={`absolute inset-0 bg-[url('/images/festival.jpg')] bg-cover bg-center ${dc.heroOpacity}`} />
+          <div className={`absolute inset-0 bg-[url('/images/shop-interior.webp')] bg-cover bg-center ${dc.heroOpacity}`} />
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
             <h1 className="text-6xl sm:text-8xl font-bold tracking-wider mb-2">
               MUSIC
@@ -630,7 +630,7 @@ export default function Home() {
       {design === 2 && (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#d4a853]/15 via-[#0a0a0a]/95 to-[#e63946]/10" />
-          <div className={`absolute inset-0 bg-[url('/images/vinyl.jpg')] bg-cover bg-center opacity-20`} />
+          <div className={`absolute inset-0 bg-[url('/images/storefront.jpg')] bg-cover bg-center opacity-15`} />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+')] opacity-40" />
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
             <div className="inline-block mb-6 px-4 py-1 border border-[var(--color-gold)]/30 rounded-full">
@@ -892,6 +892,8 @@ export default function Home() {
           </a>
           <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 ${design === 2 ? "[&>*]:rounded-none" : ""}`}>
             {[
+              { src: "/images/storefront.jpg", alt: "Music Corner storefront" },
+              { src: "/images/shop-interior.webp", alt: "Inside Music Corner" },
               { src: "/images/culture.jpg", alt: "Music culture & history" },
               { src: "/images/vinyl.jpg", alt: "Vinyl records" },
               { src: "/images/merch.jpg", alt: "Music Corner t-shirts & merch" },
