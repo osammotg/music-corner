@@ -9,21 +9,12 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* -- HEADER ------------------------------------------------- */}
-      <section className="pt-[72px]">
-        <div className="max-w-[1200px] mx-auto px-6 pt-10 pb-6 sm:pt-14 sm:pb-8">
-          <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-terracotta)] mb-3 block">
-            {s.about.label}
-          </span>
-          <h1 className="text-[2rem] sm:text-[2.5rem] font-normal leading-[1.15]">
-            {s.about.heroTitle}
-          </h1>
-        </div>
-      </section>
-
       {/* -- GALLERY ------------------------------------------------- */}
-      <section className="pb-28 sm:pb-36 px-6 bg-[var(--color-dark)]">
+      <section className="pt-[72px] pb-28 sm:pb-36 px-6 bg-[var(--color-dark)]">
         <div className="max-w-[1200px] mx-auto pt-16 sm:pt-20">
+          <h1 className="text-[2.2rem] sm:text-[2.8rem] font-normal leading-[1.15] text-white mb-10 sm:mb-14">
+            {s.about.label}
+          </h1>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 reveal-stagger">
             {[
               { src: "/images/reading-corner.jpeg", alt: "Cozy lounge area with music library", span: "md:col-span-2 md:row-span-2" },
