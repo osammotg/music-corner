@@ -47,7 +47,18 @@ export default function ContactPage() {
             {/* Info */}
             <div className="space-y-12 reveal">
               {/* Quick actions */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-3 gap-6">
+                <a
+                  href="mailto:contact@music-corner.fr"
+                  className="group p-6 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
+                >
+                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-3">
+                    Email
+                  </h3>
+                  <p className="text-[1rem] text-[var(--color-text)] group-hover:text-[var(--color-terracotta)] transition-colors break-all">
+                    contact@music-corner.fr
+                  </p>
+                </a>
                 <a
                   href="tel:+33558438734"
                   className="group p-6 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
