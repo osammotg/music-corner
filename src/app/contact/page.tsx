@@ -47,44 +47,44 @@ export default function ContactPage() {
             {/* Info */}
             <div className="space-y-12 reveal">
               {/* Quick actions */}
-              <div className="grid sm:grid-cols-3 gap-6">
-                <a
-                  href="mailto:contact@music-corner.fr"
-                  className="group p-6 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
-                >
-                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-3">
-                    Email
-                  </h3>
-                  <p className="text-[1rem] text-[var(--color-text)] group-hover:text-[var(--color-terracotta)] transition-colors break-all">
-                    contact@music-corner.fr
-                  </p>
-                </a>
-                <a
-                  href="tel:+33558438734"
-                  className="group p-6 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
-                >
-                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-3">
-                    {s.contact.callUs}
-                  </h3>
-                  <p className="text-[1.3rem] text-[var(--color-text)] group-hover:text-[var(--color-terracotta)] transition-colors">
-                    05 58 43 87 34
-                  </p>
-                </a>
-                <a
-                  href="https://www.google.com/maps/dir//Music+Corner,+33+Av.+des+Tisserands,+40150+Soorts-Hossegor,+France"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group p-6 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
-                >
-                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-3">
-                    {s.contact.visitUs}
-                  </h3>
-                  <p className="text-[1rem] text-[var(--color-text)] group-hover:text-[var(--color-terracotta)] transition-colors">
-                    33 Av. des Tisserands
-                    <br />
-                    40150 Soorts-Hossegor
-                  </p>
-                </a>
+              <div className="space-y-4">
+                {[
+                  { label: "Email", value: "contact@music-corner.fr", href: "mailto:contact@music-corner.fr" },
+                  { label: lang === "fr" ? "Téléphone" : "Phone", value: "05 58 43 87 34", href: "tel:+33558438734" },
+                  { label: lang === "fr" ? "Adresse" : "Address", value: "33 Av. des Tisserands, 40150 Soorts-Hossegor", href: "https://www.google.com/maps/dir//Music+Corner,+33+Av.+des+Tisserands,+40150+Soorts-Hossegor,+France" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-4 p-4 border border-[var(--color-border)] hover:border-[var(--color-terracotta)]/30 transition-colors"
+                  >
+                    <a
+                      href={item.href}
+                      target={item.label === (lang === "fr" ? "Adresse" : "Address") ? "_blank" : undefined}
+                      rel={item.label === (lang === "fr" ? "Adresse" : "Address") ? "noopener noreferrer" : undefined}
+                      className="flex-1 min-w-0"
+                    >
+                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)] mr-4">
+                        {item.label}
+                      </span>
+                      <span className="text-[1rem] text-[var(--color-text)] hover:text-[var(--color-terracotta)] transition-colors">
+                        {item.value}
+                      </span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigator.clipboard.writeText(item.value);
+                        const btn = e.currentTarget;
+                        btn.textContent = "✓";
+                        setTimeout(() => { btn.textContent = lang === "fr" ? "Copier" : "Copy"; }, 1500);
+                      }}
+                      className="shrink-0 px-3 py-1.5 text-[0.75rem] font-medium uppercase tracking-[0.1em] text-[var(--color-terracotta)] border border-[var(--color-terracotta)]/30 hover:bg-[var(--color-terracotta)] hover:text-white transition-colors cursor-pointer"
+                    >
+                      {lang === "fr" ? "Copier" : "Copy"}
+                    </button>
+                  </div>
+                ))}
               </div>
 
               {/* Hours */}
