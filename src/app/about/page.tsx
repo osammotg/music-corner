@@ -9,54 +9,19 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* -- HERO --------------------------------------------------- */}
-      <section className="pt-[72px]">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 sm:py-20">
-          <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-terracotta)] mb-4 block">
-            {s.about.label}
-          </span>
-          <h1 className="text-[2.5rem] sm:text-[3.5rem] font-normal leading-[1.1] mb-4">
-            {s.about.heroTitle}
-          </h1>
-          <p className="text-[1.15rem] text-[var(--color-text-muted)] leading-relaxed max-w-lg">
-            {s.about.heroSubtitle}
-          </p>
-        </div>
-      </section>
-
-      {/* -- GALLERY (photos before text) ---------------------------- */}
-      <section className="py-28 sm:py-36 px-6 bg-[var(--color-dark)]">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 reveal-stagger">
-            {[
-              { src: "/images/reading-corner.jpeg", alt: "Cozy lounge area with music library", span: "md:col-span-2 md:row-span-2" },
-              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records section", span: "" },
-              { src: "/images/shop-tshirts.jpeg", alt: "T-shirt section with guitars", span: "" },
-              { src: "/images/books-closeup.jpeg", alt: "Music books library", span: "" },
-              { src: "/images/guitars-wall.jpeg", alt: "Wall decorations with guitars", span: "" },
-            ].map((img) => (
-              <div
-                key={img.src}
-                className={`reveal img-hover aspect-square overflow-hidden ${img.span}`}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* -- STORY --------------------------------------------------- */}
-      <section className="py-28 sm:py-36 px-6">
-        <div className="max-w-[1200px] mx-auto">
+      <section className="pt-[72px]">
+        <div className="max-w-[1200px] mx-auto px-6 py-28 sm:py-36">
           <div className="max-w-3xl mx-auto">
-            <h2 className="reveal text-[2rem] sm:text-[2.5rem] font-normal leading-[1.15] mb-10">
-              {s.about.storyTitle}
-            </h2>
+            <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-terracotta)] mb-4 block reveal">
+              {s.about.label}
+            </span>
+            <h1 className="reveal text-[2.2rem] sm:text-[2.8rem] font-normal leading-[1.15] mb-4">
+              {s.about.heroTitle}
+            </h1>
+            <p className="reveal text-[1.15rem] text-[var(--color-text-muted)] leading-relaxed mb-12">
+              {s.about.heroSubtitle}
+            </p>
             <div className="reveal space-y-6 text-[1.05rem] leading-[1.85] text-[var(--color-text-muted)]">
               <p>{s.about.storyP1}</p>
               <p>{s.about.storyP2}</p>
