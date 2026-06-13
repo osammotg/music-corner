@@ -78,7 +78,7 @@ export default function Home() {
             <div className="reveal img-hover">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/reading-corner.jpeg"
+                  src="/images/shop-reception.jpeg"
                   alt="Inside Music Corner"
                   className="w-full h-full object-cover"
                 />
