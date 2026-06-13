@@ -403,12 +403,12 @@ export const reviews = [
 ];
 
 export const galleryImages = [
-  { src: "/images/storefront.jpg", alt: "Music Corner storefront" },
-  { src: "/images/shop-interior.webp", alt: "Inside Music Corner" },
-  { src: "/images/culture.jpg", alt: "Music culture & history" },
-  { src: "/images/vinyl.jpg", alt: "Vinyl records" },
-  { src: "/images/merch.jpg", alt: "Music Corner t-shirts & merch" },
-  { src: "/images/drums.jpg", alt: "DS Drum at the shop" },
-  { src: "/images/earprotection.jpg", alt: "Ear protection for festivals" },
-  { src: "/images/festival.jpg", alt: "Music Corner at festivals" },
+  { src: "/images/shop-guitars.jpeg", alt: "Guitars and amps at Music Corner" },
+  { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records collection" },
+  { src: "/images/shop-merch.jpeg", alt: "Music Corner merch and t-shirts" },
+  { src: "/images/marshall-speakers.jpeg", alt: "Marshall speakers" },
+  { src: "/images/reading-corner.jpeg", alt: "Reading corner with music books" },
+  { src: "/images/guitars-wall.jpeg", alt: "Acoustic guitars on wall" },
+  { src: "/images/kids-section.jpeg", alt: "Kids musical instruments" },
+  { src: "/images/counter.jpeg", alt: "Music Corner counter" },
 ];

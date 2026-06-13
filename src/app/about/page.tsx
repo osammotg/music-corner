@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative pt-[72px]">
         <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
           <img
-            src="/images/shop-interior.webp"
+            src="/images/counter.jpeg"
             alt="Inside Music Corner"
             className="w-full h-full object-cover"
           />
@@ -39,11 +39,11 @@ export default function AboutPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 reveal-stagger">
             {[
-              { src: "/images/storefront.jpg", alt: "Music Corner storefront", span: "md:col-span-2 md:row-span-2" },
-              { src: "/images/vinyl.jpg", alt: "Vinyl records", span: "" },
-              { src: "/images/drums.jpg", alt: "DS Drum", span: "" },
-              { src: "/images/culture.jpg", alt: "Culture", span: "" },
-              { src: "/images/merch.jpg", alt: "Merch", span: "" },
+              { src: "/images/shop-guitars.jpeg", alt: "Guitars at Music Corner", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records", span: "" },
+              { src: "/images/hero1.jpeg", alt: "Atelier and Marshall amps", span: "" },
+              { src: "/images/books-closeup.jpeg", alt: "Music books", span: "" },
+              { src: "/images/guitar-straps.jpeg", alt: "Guitar straps and accessories", span: "" },
             ].map((img) => (
               <div
                 key={img.src}

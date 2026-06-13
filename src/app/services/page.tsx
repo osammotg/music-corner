@@ -13,7 +13,7 @@ export default function ServicesPage() {
       <section className="relative pt-[72px]">
         <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
           <img
-            src="/images/guitar-hero.jpg"
+            src="/images/hero1.jpeg"
             alt="Atelier Music Corner"
             className="w-full h-full object-cover"
           />
@@ -65,7 +65,7 @@ export default function ServicesPage() {
             <div className="reveal img-hover">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/guitar-hero.jpg"
+                  src="/images/guitars-wall.jpeg"
                   alt="Guitar repair workshop"
                   className="w-full h-full object-cover"
                 />

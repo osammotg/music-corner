@@ -103,12 +103,46 @@ export default function Home() {
             <div className="reveal img-hover">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/shop-interior.webp"
+                  src="/images/reading-corner.jpeg"
                   alt="Inside Music Corner"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -- SHOP PHOTO MOSAIC -------------------------------------- */}
+      <section className="py-28 sm:py-36 px-6 bg-[var(--color-dark)]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-center mb-14 reveal">
+            <h2 className="text-[2.2rem] sm:text-[2.8rem] font-normal leading-[1.15] text-white">
+              {lang === "fr" ? "Explorez la boutique" : "Explore the shop"}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 reveal-stagger">
+            {[
+              { src: "/images/shop-guitars.jpeg", alt: "Guitars and amps", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/marshall-speakers.jpeg", alt: "Marshall speakers", span: "" },
+              { src: "/images/shop-tshirts.jpeg", alt: "T-shirts and guitars", span: "" },
+              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records", span: "" },
+              { src: "/images/cables.jpeg", alt: "Instrument cables", span: "" },
+              { src: "/images/books-wide.jpeg", alt: "Music books", span: "md:col-span-2" },
+              { src: "/images/socks-merch.jpeg", alt: "Music socks and merch", span: "" },
+              { src: "/images/kids-section.jpeg", alt: "Kids instruments", span: "" },
+            ].map((img) => (
+              <div
+                key={img.src}
+                className={`reveal img-hover aspect-square overflow-hidden ${img.span}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -171,7 +205,7 @@ export default function Home() {
             <div className="img-hover">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/guitar-hero.jpg"
+                  src="/images/hero1.jpeg"
                   alt="Guitar repair workshop"
                   className="w-full h-full object-cover"
                 />

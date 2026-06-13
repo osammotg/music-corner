@@ -12,7 +12,7 @@ export default function RentalPage() {
       <section className="relative pt-[72px]">
         <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
           <img
-            src="/images/festival.jpg"
+            src="/images/shop-guitars.jpeg"
             alt="Instruments for rent"
             className="w-full h-full object-cover"
           />
