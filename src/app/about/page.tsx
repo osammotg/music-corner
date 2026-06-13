@@ -11,7 +11,7 @@ export default function AboutPage() {
     <>
       {/* -- HEADER ------------------------------------------------- */}
       <section className="pt-[72px]">
-        <div className="max-w-[1200px] mx-auto px-6 pt-16 pb-10 sm:pt-20 sm:pb-12">
+        <div className="max-w-[1200px] mx-auto px-6 pt-10 pb-6 sm:pt-14 sm:pb-8">
           <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-terracotta)] mb-3 block">
             {s.about.label}
           </span>

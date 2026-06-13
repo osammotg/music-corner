@@ -142,9 +142,9 @@ export default function Home() {
       </section>
 
       {/* -- SERVICES PREVIEW ---------------------------------------- */}
-      <section className="py-28 sm:py-36 px-6 bg-[var(--color-sand)]">
+      <section className="py-20 sm:py-24 px-6 bg-[var(--color-sand)]">
         <div className="max-w-[1200px] mx-auto">
-          <div className="max-w-2xl mb-16 reveal">
+          <div className="max-w-2xl mb-12 reveal">
             <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-terracotta)] mb-4 block">
               {s.services.label}
             </span>
@@ -155,7 +155,7 @@ export default function Home() {
               {s.services.subtitle}
             </p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center reveal">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-center reveal">
             <div>
               <h3 className="text-[1.3rem] font-normal mb-4">
                 {s.services.repair.title}
@@ -178,7 +178,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="img-hover">
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className="aspect-[3/4] overflow-hidden">
                 <img
                   src="/images/hero1.jpeg"
                   alt="Guitar repair workshop"
