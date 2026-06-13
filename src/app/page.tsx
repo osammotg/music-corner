@@ -1,20 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useLang, t, reviews, galleryImages, authorizedBrands } from "@/lib/i18n";
 import Stars from "@/components/Stars";
 
-const heroOptions = [
-  { src: "/images/guitar-hero.jpg", label: "Original" },
-  { src: "/images/hero1.jpeg", label: "Atelier" },
-  { src: "/images/hero2.jpeg", label: "Boutique" },
-];
-
 export default function Home() {
   const { lang } = useLang();
   const s = t[lang];
-  const [heroIndex, setHeroIndex] = useState(0);
 
   return (
     <>
@@ -22,9 +14,9 @@ export default function Home() {
       <section className="relative h-screen flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={heroOptions[heroIndex].src}
+            src="/images/hero2.jpeg"
             alt="Music Corner"
-            className="w-full h-full object-cover transition-opacity duration-500"
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/80 via-[var(--color-dark)]/30 to-[var(--color-dark)]/20" />
         </div>
@@ -57,23 +49,6 @@ export default function Home() {
             <span className="ml-1">5.0 / 5</span>
             <span className="mx-1">&middot;</span>
             <span>37+ {s.reviews.googleRating}</span>
-          </div>
-
-          {/* Hero image selector – remove after choosing */}
-          <div className="mt-8 flex items-center gap-3">
-            {heroOptions.map((opt, i) => (
-              <button
-                key={opt.label}
-                onClick={() => setHeroIndex(i)}
-                className={`px-4 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.1em] rounded-sm cursor-pointer transition-all ${
-                  heroIndex === i
-                    ? "bg-[var(--color-terracotta)] text-white"
-                    : "bg-white/20 text-white/80 hover:bg-white/30"
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
           </div>
         </div>
       </section>
