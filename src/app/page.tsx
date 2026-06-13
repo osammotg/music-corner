@@ -123,14 +123,14 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 reveal-stagger">
             {[
-              { src: "/images/shop-guitars.jpeg", alt: "Guitars and amps", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/counter.jpeg", alt: "Music Corner counter with neon sign", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records section", span: "" },
               { src: "/images/marshall-speakers.jpeg", alt: "Marshall speakers", span: "" },
-              { src: "/images/shop-tshirts.jpeg", alt: "T-shirts and guitars", span: "" },
-              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records", span: "" },
-              { src: "/images/cables.jpeg", alt: "Instrument cables", span: "" },
-              { src: "/images/books-wide.jpeg", alt: "Music books", span: "md:col-span-2" },
-              { src: "/images/socks-merch.jpeg", alt: "Music socks and merch", span: "" },
-              { src: "/images/kids-section.jpeg", alt: "Kids instruments", span: "" },
+              { src: "/images/shop-merch.jpeg", alt: "T-shirts and music merch", span: "" },
+              { src: "/images/guitar-straps.jpeg", alt: "Guitar straps and accessories", span: "" },
+              { src: "/images/books-wide.jpeg", alt: "Music books library", span: "md:col-span-2" },
+              { src: "/images/shop-guitars.jpeg", alt: "Guitars and amps", span: "" },
+              { src: "/images/kids-section.jpeg", alt: "Baby and kids music section", span: "" },
             ].map((img) => (
               <div
                 key={img.src}

@@ -39,11 +39,11 @@ export default function AboutPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 reveal-stagger">
             {[
-              { src: "/images/shop-guitars.jpeg", alt: "Guitars at Music Corner", span: "md:col-span-2 md:row-span-2" },
-              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records", span: "" },
-              { src: "/images/hero1.jpeg", alt: "Atelier and Marshall amps", span: "" },
-              { src: "/images/books-closeup.jpeg", alt: "Music books", span: "" },
-              { src: "/images/guitar-straps.jpeg", alt: "Guitar straps and accessories", span: "" },
+              { src: "/images/reading-corner.jpeg", alt: "Cozy lounge area with music library", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records section", span: "" },
+              { src: "/images/shop-tshirts.jpeg", alt: "T-shirt section with guitars", span: "" },
+              { src: "/images/books-closeup.jpeg", alt: "Music books library", span: "" },
+              { src: "/images/guitars-wall.jpeg", alt: "Wall decorations with guitars", span: "" },
             ].map((img) => (
               <div
                 key={img.src}

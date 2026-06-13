@@ -403,12 +403,12 @@ export const reviews = [
 ];
 
 export const galleryImages = [
-  { src: "/images/shop-guitars.jpeg", alt: "Guitars and amps at Music Corner" },
-  { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records collection" },
-  { src: "/images/shop-merch.jpeg", alt: "Music Corner merch and t-shirts" },
-  { src: "/images/marshall-speakers.jpeg", alt: "Marshall speakers" },
-  { src: "/images/reading-corner.jpeg", alt: "Reading corner with music books" },
-  { src: "/images/guitars-wall.jpeg", alt: "Acoustic guitars on wall" },
-  { src: "/images/kids-section.jpeg", alt: "Kids musical instruments" },
-  { src: "/images/counter.jpeg", alt: "Music Corner counter" },
+  { src: "/images/counter.jpeg", alt: "Music Corner reception" },
+  { src: "/images/vinyl-collection.jpeg", alt: "Vinyl records section" },
+  { src: "/images/guitar-straps.jpeg", alt: "Guitar straps and accessories" },
+  { src: "/images/marshall-speakers.jpeg", alt: "Marshall speaker section" },
+  { src: "/images/shop-merch.jpeg", alt: "T-shirts and music products" },
+  { src: "/images/books-closeup.jpeg", alt: "Music books library" },
+  { src: "/images/socks-merch.jpeg", alt: "Socks section" },
+  { src: "/images/cables.jpeg", alt: "Instrument cable section" },
 ];
